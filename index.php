@@ -10,7 +10,22 @@
     <body>
         <div id="main">
         <?php
-            play();
+            $playerState = true;
+            $playerNum = 0;
+            while($playerState){
+                if($scores[$playerNum] > 35){
+                    $playerNum++;
+                    if(playerNum > 3){
+                        break;
+                    }
+                    
+                }
+                $poppedValue = explode("_", array_pop($deck));
+                $scores[$playerNum] += $poppedValue[1];
+            }
+            foreach ($scores as $score){
+                echo $score . "</br>";
+            }
         ?>
         
         <form>
