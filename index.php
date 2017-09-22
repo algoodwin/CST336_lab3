@@ -35,8 +35,12 @@ foreach ($deck as $card) {              //displays all values of the array for d
             for($i = 0; $i < 4; $i++){
                 while($scores[$i] < 35){
                     $poppedValue = explode("_", array_pop($deck));
+                    echo '<img src ="cards/'.$poppedValue[0].'/'.$poppedValue[1].'.png">';
+                    
+                    
                     $scores[$i] += $poppedValue[1];
                 }
+                echo "<br>";
             }
             foreach ($scores as $score){
                 echo $score . "</br>";
