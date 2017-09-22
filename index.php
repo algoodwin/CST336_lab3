@@ -14,10 +14,6 @@ for ($i = 0; $i < 4; $i++) {            //sets the suit
 
 shuffle($deck);
 
-foreach ($deck as $card) {              //displays all values of the array for debugging 
-    echo $card . "<br />";
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -30,23 +26,35 @@ foreach ($deck as $card) {              //displays all values of the array for d
         </style>
     </head>
     <body>
-        <div id="main">
-        <?php
-            for($i = 0; $i < 4; $i++){
-                while($scores[$i] < 35){
+        <div id="name">
+            <h1> Silverjack </h1>
+        </div>
+        <div id ='pic_container'>
+        <?php 
+     ///Before the session starts to randomize the array////
+        for($i =0; $i<4; $i++)
+        {
+        $imageURLs[$i]= $i;
+        }
+        
+        shuffle($imageURLs);
+        
+        for($i =0; $i<4; $i++)
+        {
+            echo "<img src = 'people/$imageURLs[$i].jpg'/>";
+            unset($imageURLs[$randomIndex]);
+            while($scores[$i] < 35){
                     $poppedValue = explode("_", array_pop($deck));
                     echo '<img src ="cards/'.$poppedValue[0].'/'.$poppedValue[1].'.png">';
                     
                     
                     $scores[$i] += $poppedValue[1];
                 }
-                echo "<br>";
+                echo "<p>". $score[$i] . "</p>";
             }
-            foreach ($scores as $score){
-                echo $score . "</br>";
-            }
+           
+        
         ?>
-
         <form>
             <input type="submit" value="Spin!"/>
         </form>
