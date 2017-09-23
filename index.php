@@ -43,16 +43,26 @@ shuffle($deck);
         }
         
         shuffle($imageURLs);
-        
+        $picArray = array();
         for($i =0; $i<4; $i++)
         {
             echo "<img src = 'people/$imageURLs[$i].jpg'/>";
+            $picArray[] = $imageURLs[$i];
             while($scores[$i] < 35){
                     $poppedValue = explode("_", array_pop($deck));
                     echo '<img src ="cards/'.$poppedValue[0].'/'.$poppedValue[1].'.png">';
                     $scores[$i] += $poppedValue[1];
                 }
                 echo $scores[$i] . "<br/>";
+                if($picArray[$i] == 0) {
+                     echo "Derek<br/>";
+                  } else if($picArray[$i] == 1) {
+                     echo "Alyssia<br/>";
+                  } else if($picArray[$i] == 2) {
+                     echo "Cameron<br/>";
+                  } else if($picArray[$i] == 3) {
+                     echo "Jaime<br/>";
+                  }
                 unset($imageURLs[$randomIndex]);
             }
            
@@ -61,7 +71,7 @@ shuffle($deck);
           //Determines the highest value between players
           $maxScore = $scores[0];
           for($i = 0; $i < 4; $i++) {
-              if($scores[$i] > $maxScore) {
+              if($scores[$i] > $maxScore && $scores[$i] < 43) {
                   $maxScore = $scores[$i];
               }
           }
@@ -82,7 +92,15 @@ shuffle($deck);
           //Assigns points to the winners
           for($i = 0; $i < 4; $i++) {
               if($winner[$i] == 1) {
-                  $_SESSION[''] += $totalPoints;
+                  if($picArray[$i] == 0) {
+                     echo "Derek won with " . $totalPoints . " points! <br/>";
+                  } else if($picArray[$i] == 1) {
+                     echo "Alyssia won with " . $totalPoints . " points! <br/>";
+                  } else if($picArray[$i] == 2) {
+                     echo "Cameron won with " . $totalPoints . " points! <br/>";
+                  } else if($picArray[$i] == 3) {
+                     echo "Jaime won with " . $totalPoints . " points! <br/>";
+                  }
               }
           }
         ?>
