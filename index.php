@@ -1,8 +1,8 @@
 <?php
 session_start();
-if(isset($_SESSION['matchCount'])) { // Checks whether the session exists
+if(isset($_SESSION['matchcount'])) { // Checks whether the session exists
     
-    $_SESSION['matchCount'] = 1;
+    $_SESSION['matchcount'] = 0;
 }
 
 $deck = array();
@@ -37,6 +37,7 @@ shuffle($deck);
         <div id ='pic_container'>
         <?php 
      ///Before the session starts to randomize the array////
+     $starttime = microtime(true);
         for($i =0; $i<4; $i++)
         {
         $imageURLs[$i]= $i;
@@ -65,9 +66,6 @@ shuffle($deck);
                   }
                 unset($imageURLs[$randomIndex]);
             }
-           
-        $_SESSION['matchcount'] += 1;
-          echo "Matches this session: " + $_SESSION['matchcount'] . "<br/>";
           //Determines the highest value between players
           $maxScore = $scores[0];
           for($i = 0; $i < 4; $i++) {
@@ -103,6 +101,15 @@ shuffle($deck);
                   }
               }
           }
+          $endtime = microtime(true);
+          $timediff = $endtime - $starttime;
+          echo "This match took " . $timediff . " second(s) to complete. <br/>";
+          $_SESSION['time'] += $timediff;
+          $_SESSION['matchCount'] += 1;
+          echo "Matches this session: " + $_SESSION['matchCount'] . "<br/>";
+          echo "Total time: " . $_SESSION['time'] . " second(s).<br/>";
+          $averageTime = $_SESSION['time'] / $_SESSION['matchCount'];
+          echo "Average time: " . $averageTime . " second(s).<br/>";
         ?>
         <form>
             <input type="submit" value="Replay!"/>
