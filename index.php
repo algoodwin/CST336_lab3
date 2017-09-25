@@ -67,7 +67,7 @@ shuffle($deck);
                 unset($imageURLs[$randomIndex]);
             }
           //Determines the highest value between players
-          $maxScore = $scores[0];
+          $maxScore = 0;
           for($i = 0; $i < 4; $i++) {
               if($scores[$i] > $maxScore && $scores[$i] < 43) {
                   $maxScore = $scores[$i];
