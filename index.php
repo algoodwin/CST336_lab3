@@ -27,13 +27,15 @@ shuffle($deck);
         <title> SilverJack </title>
         <meta charset="utf-8"/>
         <style>
-            @import url("css/styles.css");
+            @import url("css/layout.css");
         </style>
     </head>
     <body>
         <div id="name">
             <h1> Silverjack </h1>
         </div>
+        </br>
+        
         <div id ='pic_container'>
         <?php 
      ///Before the session starts to randomize the array////
@@ -49,12 +51,16 @@ shuffle($deck);
         {
             echo "<img src = 'people/$imageURLs[$i].jpg'/>";
             $picArray[] = $imageURLs[$i];
+            echo "       ";
             while($scores[$i] < 35){
                     $poppedValue = explode("_", array_pop($deck));
                     echo '<img src ="cards/'.$poppedValue[0].'/'.$poppedValue[1].'.png">';
                     $scores[$i] += $poppedValue[1];
                 }
-                echo $scores[$i] . "<br/>";
+             echo"<div id='scores'>";
+                echo $scores[$i] . "   <br/>";
+            echo"</div>";
+                 echo "<div id ='players'>";
                 if($picArray[$i] == 0) {
                      echo "Derek<br/>";
                   } else if($picArray[$i] == 1) {
@@ -66,6 +72,7 @@ shuffle($deck);
                   }
                 unset($imageURLs[$randomIndex]);
             }
+            echo "</div>";
           //Determines the highest value between players
           $maxScore = 0;
           for($i = 0; $i < 4; $i++) {
@@ -88,6 +95,7 @@ shuffle($deck);
               }
           }
           //Assigns points to the winners
+          echo "<div id = winner>";
           for($i = 0; $i < 4; $i++) {
               if($winner[$i] == 1) {
                   if($picArray[$i] == 0) {
@@ -101,6 +109,9 @@ shuffle($deck);
                   }
               }
           }
+          echo "</div>";
+          echo "<div id = bottom>";
+          echo "</br>";
           $endtime = microtime(true);
           $timediff = $endtime - $starttime;
           echo "This match took " . $timediff . " second(s) to complete. <br/>";
@@ -110,6 +121,7 @@ shuffle($deck);
           echo "Total time: " . $_SESSION['time'] . " second(s).<br/>";
           $averageTime = $_SESSION['time'] / $_SESSION['matchCount'];
           echo "Average time: " . $averageTime . " second(s).<br/>";
+            echo"</div>"
         ?>
         <form>
             <input type="submit" value="Replay!"/>
